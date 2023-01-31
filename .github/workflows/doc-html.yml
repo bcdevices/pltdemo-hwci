@@ -1,0 +1,16 @@
+name: Documentation Build
+
+on: push
+
+jobs:
+  doc-build-html:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Apply container owner mismatch workaround
+      run: |
+        echo dummy
+
+    - name: Checkout
+      run: |
+        echo dummy

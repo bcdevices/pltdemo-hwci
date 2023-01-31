@@ -1,0 +1,28 @@
+name: Run tests with twister
+
+on: push
+
+jobs:
+  twister-build-prep:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Apply container owner mismatch workaround
+      run: |
+        echo dummy
+
+    - name: Checkout
+      run: |
+        echo dummy
+
+  twister-build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Apply container owner mismatch workaround
+      run: |
+        echo dummy
+
+    - name: Checkout
+      run: |
+        echo dummy

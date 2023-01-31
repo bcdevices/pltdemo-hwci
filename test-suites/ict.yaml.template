@@ -1,0 +1,47 @@
+title: "ICT v{{VERSION}}"
+suite:
+- ident: PREP
+  steps:
+  - command: power off
+  - command: uartCfg UART0 115200
+  - command: power 5V on
+- ident: PROG.DSW
+  steps:
+  - command: identify nRF52
+  - command: program nRF52 shell-{{BOARD}}-{{VERSION}}.hex
+  - command: sleepms 1000
+- ident: MCURESET
+  steps:
+  - command: pin SWD_NRST output low
+  - command: pin SWD_NRST output high
+- ident: Shell
+  steps:
+  - uartcmd: uart UART0
+    send: "\r\nkernel version\r\n"
+    expect: "Zephyr version"
+    extract: "Zephyr version (.*)\r\n"
+  - uartcmd: uart UART0
+    send: "\r\nsensor get TEMP_0\r\n"
+    extract: "die_temp = (.*)\r\n"
+    extractKey: DIE_TEMP
+- ident: GPIO
+  # P0.28 (BAT_CHGB) is connected to DATP07
+  steps:
+  - uartcmd: uart UART0
+    send: "gpio conf GPIO_0 28 out\r\n"
+    expect: "Configuring GPIO_0 pin 28"
+  # Drive P0.28 low
+  - uartcmd: uart UART0
+    send: "gpio set GPIO_0 28 0\r\n"
+    expect: "Writing to GPIO_0 pin 28"
+  # Check if TP2 (BAT_CHGB) is low
+  - command: measure voltageDATP07 -10-600mV
+- ident: UART 
+  steps:
+  - command: uartExpect UART0 "[Sensor:OK]"
+- ident: PROG.APP
+  steps:
+  - command: program nRF52 app-{{BOARD}}-{{VERSION}}.hex
+- ident: SENSOR
+  steps:
+  - command: uartAwait UART0 30
