@@ -24,6 +24,17 @@ suite:
     send: "\r\nsensor get TEMP_0\r\n"
     extract: "die_temp = (.*)\r\n"
     extractKey: DIE_TEMP
+
+  - uartcmd: uart UART0
+    send: "\r\nsensor get SHT3XD 13\r\n"
+    extract: "ambient_temp = (.*)\r\n"
+    extractKey: AMBIENT_TEMP
+
+  - uartcmd: uart UART0
+    send: "\r\nsensor get SHT3XD 16\r\n"
+    extract: "humidity = (.*)\r\n"
+    extractKey: HUMIDITY
+
 - ident: GPIO
   # P0.28 (BAT_CHGB) is connected to DATP07
   steps:
@@ -36,12 +47,6 @@ suite:
     expect: "Writing to GPIO_0 pin 28"
   # Check if TP2 (BAT_CHGB) is low
   - command: measure voltageDATP07 -10-600mV
-- ident: UART 
-  steps:
-  - command: uartExpect UART0 "[Sensor:OK]"
 - ident: PROG.APP
   steps:
   - command: program nRF52 app-{{BOARD}}-{{VERSION}}.hex
-- ident: SENSOR
-  steps:
-  - command: uartAwait UART0 30
