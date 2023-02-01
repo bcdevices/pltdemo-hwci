@@ -32,16 +32,6 @@ void main(void)
 		return;
 	}
 
-	err = app_sensor_evironmental_setup();
-	if (err) {
-		printf("app_sensor_evironmental_setup() failed, err=%d\n", err);
-	}
-
-	err = app_sensor_motion_setup();
-	if (err) {
-		printf("app_sensor_motion_setup() failed, err=%d\n", err);
-	}
-
 	err = app_buzzer_setup();
 	if (err) {
 		return;

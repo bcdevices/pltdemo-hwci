@@ -21,9 +21,9 @@ static const struct device *strip;
 static size_t ledstrip_counter;
 
 static const struct led_rgb colors[] = {
-	{ .r = 0x1f, .g = 0x00, .b = 0x00, },   /* red */
-	{ .r = 0x00, .g = 0x1f, .b = 0x00, },   /* green */
-	{ .r = 0x00, .g = 0x00, .b = 0x1f, },   /* blue */
+	{ .r = 0x04, .g = 0x00, .b = 0x00, },   /* red 4 */
+	{ .r = 0x02, .g = 0x00, .b = 0x00, },   /* red 2 */
+	{ .r = 0x01, .g = 0x00, .b = 0x00, },   /* red 1 */
 };
 
 static const struct led_rgb black = {
