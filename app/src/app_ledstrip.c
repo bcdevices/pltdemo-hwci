@@ -22,8 +22,8 @@ static size_t ledstrip_counter;
 
 static const struct led_rgb colors[] = {
 	{ .r = 0x04, .g = 0x00, .b = 0x00, },   /* red 4 */
-	{ .r = 0x02, .g = 0x1f, .b = 0x00, },   /* red 2 */
-	{ .r = 0x01, .g = 0x00, .b = 0x1f, },   /* red 1 */
+	{ .r = 0x02, .g = 0x00, .b = 0x00, },   /* red 2 */
+	{ .r = 0x01, .g = 0x00, .b = 0x00, },   /* red 1 */
 };
 
 static const struct led_rgb black = {
